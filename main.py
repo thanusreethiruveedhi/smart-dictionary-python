@@ -1,51 +1,71 @@
 from src.dictionary import search_word
+from src.database import save_history, view_history, clear_history
 
 
-def main():
-    print("=" * 60)
-    print("            SMART DICTIONARY PRO")
-    print("=" * 60)
+def search():
 
-    word = input("Enter a word: ").strip().lower()
+    word = input("\nEnter a word: ").strip().lower()
 
     result = search_word(word)
 
     if not result:
-        print("\n❌ Word not found!")
+        print("\nWord not found.")
         return
+
+    save_history(word)
 
     entry = result[0]
 
     print("\n" + "=" * 60)
-    print(f"📖 Word : {entry['word']}")
+    print("Word :", entry["word"])
 
     if entry.get("phonetic"):
-        print(f"🔊 Pronunciation : {entry['phonetic']}")
+        print("Pronunciation :", entry["phonetic"])
 
     print("=" * 60)
 
     for meaning in entry["meanings"]:
 
-        print(f"\n📚 Part of Speech : {meaning['partOfSpeech']}")
+        print("\nPart of Speech :", meaning["partOfSpeech"])
 
         for definition in meaning["definitions"]:
 
-            print(f"\n✅ Meaning : {definition['definition']}")
+            print("\nMeaning :", definition["definition"])
 
             if definition.get("example"):
-                print(f"💡 Example : {definition['example']}")
+                print("Example :", definition["example"])
 
-            if definition.get("synonyms"):
-                print("⭐ Synonyms :")
-                for synonym in definition["synonyms"][:5]:
-                    print(f"   • {synonym}")
 
-            if definition.get("antonyms"):
-                print("🚫 Antonyms :")
-                for antonym in definition["antonyms"][:5]:
-                    print(f"   • {antonym}")
+def main():
 
-        print("-" * 60)
+    while True:
+
+        print("\n")
+        print("=" * 50)
+        print("SMART DICTIONARY PRO")
+        print("=" * 50)
+        print("1. Search Word")
+        print("2. View Search History")
+        print("3. Clear History")
+        print("4. Exit")
+
+        choice = input("\nEnter your choice: ")
+
+        if choice == "1":
+            search()
+
+        elif choice == "2":
+            view_history()
+
+        elif choice == "3":
+            clear_history()
+
+        elif choice == "4":
+            print("\nThank you for using Smart Dictionary Pro.")
+            break
+
+        else:
+            print("\nInvalid choice.")
 
 
 if __name__ == "__main__":
