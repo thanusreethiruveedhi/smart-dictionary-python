@@ -2,9 +2,9 @@ from src.dictionary import search_word
 
 
 def main():
-    print("=" * 50)
-    print("        SMART DICTIONARY PRO")
-    print("=" * 50)
+    print("=" * 60)
+    print("            SMART DICTIONARY PRO")
+    print("=" * 60)
 
     word = input("Enter a word: ").strip().lower()
 
@@ -16,24 +16,36 @@ def main():
 
     entry = result[0]
 
-    print("\n" + "=" * 50)
-    print(f"Word: {entry['word']}")
+    print("\n" + "=" * 60)
+    print(f"📖 Word : {entry['word']}")
 
-    if "phonetic" in entry:
-        print(f"Pronunciation: {entry['phonetic']}")
+    if entry.get("phonetic"):
+        print(f"🔊 Pronunciation : {entry['phonetic']}")
 
-    print("=" * 50)
+    print("=" * 60)
 
-    meanings = entry["meanings"]
+    for meaning in entry["meanings"]:
 
-    for meaning in meanings:
-        print(f"\nPart of Speech: {meaning['partOfSpeech']}")
+        print(f"\n📚 Part of Speech : {meaning['partOfSpeech']}")
 
         for definition in meaning["definitions"]:
-            print(f"\nMeaning: {definition['definition']}")
 
-            if "example" in definition:
-                print(f"Example: {definition['example']}")
+            print(f"\n✅ Meaning : {definition['definition']}")
+
+            if definition.get("example"):
+                print(f"💡 Example : {definition['example']}")
+
+            if definition.get("synonyms"):
+                print("⭐ Synonyms :")
+                for synonym in definition["synonyms"][:5]:
+                    print(f"   • {synonym}")
+
+            if definition.get("antonyms"):
+                print("🚫 Antonyms :")
+                for antonym in definition["antonyms"][:5]:
+                    print(f"   • {antonym}")
+
+        print("-" * 60)
 
 
 if __name__ == "__main__":
