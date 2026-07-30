@@ -1,5 +1,13 @@
 # 📖 Smart Dictionary Pro
 
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+
+![License](https://img.shields.io/badge/License-MIT-green)
+
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
+![API](https://img.shields.io/badge/API-FreeDictionary-orange)
+
 A modern Python Dictionary application that allows users to search English words, view meanings, examples, synonyms, antonyms, pronunciation, manage favorites, and maintain search history.
 
 ---
